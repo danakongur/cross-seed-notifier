@@ -1,0 +1,8 @@
+services:
+    cross-seed-notifier:
+        build: .
+        image: cross-seed-notifier
+        environment:
+            - PORT=8001
+            - DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/1322727758480146473/jknaSZvyYO1G1zkAVUZTvid5zXqLUxMblTgMkrWpkpNG5Wu7XdlRbx4lwhXgpvfSG_uw"
+        

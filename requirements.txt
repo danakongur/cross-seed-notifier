@@ -1,0 +1,4 @@
+fastapi[standard]>=0.115.6
+pydantic>=2.10.5
+requests>=2.32.3
+apprise>=1.9.2
