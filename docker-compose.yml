@@ -2,7 +2,12 @@ services:
     cross-seed-notifier:
         build: .
         image: cross-seed-notifier
+        container_name: cross-seed-notifier
         environment:
             - PORT=8001
-            - DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/1322727758480146473/jknaSZvyYO1G1zkAVUZTvid5zXqLUxMblTgMkrWpkpNG5Wu7XdlRbx4lwhXgpvfSG_uw"
-        
+            # yes i put my whole webhook in a public repo, what are you gonna do about it?
+            - DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/1322727758480146473/jknaSZvyYO1G1zkAVUZTvid5zXqLUxMblTgMkrWpkpNG5Wu7XdlRbx4lwhXgpvfSG_uw
+            - PYTHONUNBUFFERED=1
+        ports: 
+            - 8001:8001
+        restart: unless-stopped

@@ -8,6 +8,7 @@ import os
  '''
 
 discordWebhookURL = os.getenv("DISCORD_WEBHOOK_URL")
+print(f"Got url variable: {discordWebhookURL}, type: {type(discordWebhookURL)}")
 
 class ExtraData(BaseModel):
     event: str
@@ -25,7 +26,15 @@ class CrossSeedNotification(BaseModel):
 app = FastAPI()
 
 apprise_instance = apprise.Apprise()
-apprise_instance.add(discordWebhookURL)
+print(f"{apprise_instance}")
+success = apprise_instance.add(discordWebhookURL)
+if success:
+    print(f"adding url worked")
+else:
+    print(f"adding url failed")
+print("urls:",apprise_instance.urls())
+
+
 
 def constructDiscordMessage(jsonData: CrossSeedNotification) -> str:
     data =  f"""### Cross seed {jsonData.extra.result.lower()}
@@ -36,6 +45,7 @@ Source: {jsonData.extra.source}"""
 
 def answer(data):
     try:
+        print("URLS",apprise_instance.urls())
         success = apprise_instance.notify(body=constructDiscordMessage(data), body_format=apprise.NotifyFormat.MARKDOWN)
         if success:
             return {"status": f"Notification sent"}
